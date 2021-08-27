@@ -16,9 +16,14 @@ describe('AppController (e2e)', () => {
   });
 
   it('/ (GET)', () => {
+    const server = app.getHttpServer();
+    return request(server).get('/health').expect(200).expect('healthy');
+  });
+
+  it('/ (GET) api team', () => {
     return request(app.getHttpServer())
-      .get('/')
+      .get('/team')
       .expect(200)
-      .expect('Hello World!');
+      .expect('This action returns all team');
   });
 });
