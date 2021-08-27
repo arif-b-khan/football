@@ -1,0 +1,14 @@
+{
+  "development": {
+    "storage": "litedb3",
+    "dialect": "sqlite"
+  },
+  "test": {
+    "database": "/db/litedb3_test",
+    "dialect": "sqlite"
+  },
+  "production": {
+    "database": "litedb3_prod",
+    "dialect": "sqlite"
+  }
+}
