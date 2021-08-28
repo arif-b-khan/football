@@ -4,11 +4,11 @@
     "dialect": "sqlite"
   },
   "test": {
-    "database": "/db/litedb3_test",
+    "database": "litedb3",
     "dialect": "sqlite"
   },
   "production": {
-    "database": "litedb3_prod",
+    "database": "litedb3",
     "dialect": "sqlite"
   }
 }
