@@ -20,9 +20,9 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Team } from './entities/team.entity';
-import { IdParam } from 'src/shared/models/id-param';
-import { NameParam } from 'src/shared/models/name-param';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth-guard.guard';
+import { IdParam } from '../shared/models/id-param';
+import { NameParam } from '../shared/models/name-param';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth-guard.guard';
 
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
@@ -63,9 +63,9 @@ export class TeamController {
   @ApiOperation({ summary: 'Find team by name' })
   @ApiResponse({ status: 200, description: 'Ok' })
   @ApiResponse({ status: 404, description: 'Team not found' })
-  @Get('/byname/:name')
-  async findByName(@Param('name') name: NameParam): Promise<Team[]> {
-    const teams: Team[] = await this.teamService.findByName(name.name);
+  @Get('byname/:name')
+  async findByName(@Param('name') name: string): Promise<Team[]> {
+    const teams: Team[] = await this.teamService.findByName(name);
     if (teams === null) {
       throw new NotFoundException('User not found');
     }

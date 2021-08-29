@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
@@ -15,12 +19,18 @@ export class TeamService {
   ) {}
 
   async create(createTeamDto: CreateTeamDto): Promise<Team> {
-    const created: Team = await Team.create({
-      name: createTeamDto.name,
-      img: createTeamDto.img,
-    });
-    created.save();
-    return created;
+    const teamExists: Team[] = await this.findByName(createTeamDto.name);
+    console.log(teamExists);
+    if (teamExists && teamExists.length === 0) {
+      const created: Team = await Team.create({
+        name: createTeamDto.name,
+        img: createTeamDto.img,
+      });
+      created.save();
+      return created;
+    } else {
+      throw new BadRequestException('Team already exists');
+    }
   }
 
   async findAll(): Promise<Team[]> {

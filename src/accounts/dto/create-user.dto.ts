@@ -5,7 +5,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { Match } from 'src/shared/match.decorator';
+import { Match } from '../../shared/match.decorator';
 
 export class CreateUserDto {
   @MaxLength(20)

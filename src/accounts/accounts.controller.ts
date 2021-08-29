@@ -1,11 +1,9 @@
 import { Controller, Post, Body, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AuthService } from 'src/auth/auth.service';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth-guard.guard';
-import { LocalAuthGuard } from 'src/auth/guards/local.guard';
-import { User } from 'src/users/entities/user';
-import { UsersService } from 'src/users/users.service';
+import { AuthService } from '../auth/auth.service';
+import { LocalAuthGuard } from '../auth/guards/local.guard';
+import { User } from '../users/entities/user';
+import { UsersService } from '../users/users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserAccountDto } from './dto/user-account.dto';
 import * as bcrypt from 'bcrypt';

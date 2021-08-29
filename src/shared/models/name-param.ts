@@ -1,6 +1,6 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsNumberString } from 'class-validator';
 
 export class NameParam {
-  @IsNotEmpty()
+  @IsNumberString()
   name: string;
 }
