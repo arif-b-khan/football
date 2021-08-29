@@ -17,6 +17,7 @@ async function bootstrap() {
     .setDescription('Football team manager')
     .setVersion('1.0')
     .addTag('Football')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);

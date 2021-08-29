@@ -8,15 +8,24 @@ import {
   Delete,
   NotFoundException,
   HttpCode,
+  UseGuards,
 } from '@nestjs/common';
 import { TeamService } from './team.service';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Team } from './entities/team.entity';
 import { IdParam } from 'src/shared/models/id-param';
 import { NameParam } from 'src/shared/models/name-param';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth-guard.guard';
 
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 @ApiTags('Team')
 @Controller('team')
 export class TeamController {

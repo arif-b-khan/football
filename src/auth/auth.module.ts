@@ -1,0 +1,25 @@
+import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { User } from 'src/users/entities/user';
+import { UsersModule } from 'src/users/users.module';
+import { UsersService } from 'src/users/users.service';
+import { AuthService } from './auth.service';
+import { JwtStratergy } from './stratergies/jwt-stratergy';
+import { LocalStrategy } from './stratergies/local-strategy';
+
+@Module({
+  imports: [
+    UsersModule,
+    PassportModule,
+    JwtModule.register({
+      secret: 'footbalsecret',
+      signOptions: { expiresIn: '60s' },
+    }),
+    SequelizeModule.forFeature([User]),
+  ],
+  providers: [AuthService, UsersService, JwtStratergy, LocalStrategy],
+  exports: [AuthService, UsersService, JwtStratergy],
+})
+export class AuthModule {}

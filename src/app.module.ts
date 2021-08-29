@@ -1,8 +1,13 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TeamModule } from './team/team.module';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { AccountsModule } from './accounts/accounts.module';
+import { AuthService } from './auth/auth.service';
 
 @Module({
   imports: [
@@ -12,7 +17,13 @@ import { SequelizeModule } from '@nestjs/sequelize';
       autoLoadModels: true,
       synchronize: true,
     }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TeamModule,
+    UsersModule,
+    AuthModule,
+    AccountsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
