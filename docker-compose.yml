@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+
+  nestserver:
+    container_name: nest-server
+    image: nest-server
+    command: npm run start:runtime
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
+
+
+# docker-compose -f docker-compose.yml build

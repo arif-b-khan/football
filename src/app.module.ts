@@ -7,7 +7,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { AccountsModule } from './accounts/accounts.module';
-import { AuthService } from './auth/auth.service';
+import { AppClusterService } from './app-cluster/app-cluster.service';
+
 
 @Module({
   imports: [
@@ -26,6 +27,6 @@ import { AuthService } from './auth/auth.service';
     AccountsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AppClusterService],
 })
 export class AppModule {}

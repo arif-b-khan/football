@@ -14,7 +14,7 @@ import { LocalStrategy } from './stratergies/local-strategy';
     UsersModule,
     PassportModule,
     JwtModule.register({
-      secret: 'footbalsecret',
+      secret: process.env.SECRET,
       signOptions: { expiresIn: '60s' },
     }),
     SequelizeModule.forFeature([User]),
