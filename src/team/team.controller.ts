@@ -21,7 +21,6 @@ import {
 } from '@nestjs/swagger';
 import { Team } from './entities/team.entity';
 import { IdParam } from '../shared/models/id-param';
-import { NameParam } from '../shared/models/name-param';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth-guard.guard';
 
 @UseGuards(JwtAuthGuard)
@@ -87,7 +86,7 @@ export class TeamController {
   @ApiResponse({ status: 200, description: 'Deleted' })
   @ApiResponse({ status: 404, description: 'Team not found' })
   @Delete(':id')
-  async remove(@Param('id') id: IdParam): Promise<void> {
-    return await this.teamService.remove(+id);
+  async remove(@Param() params: IdParam): Promise<void> {
+    return await this.teamService.remove(+params.id);
   }
 }

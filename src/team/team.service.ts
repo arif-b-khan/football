@@ -21,13 +21,18 @@ export class TeamService {
   async create(createTeamDto: CreateTeamDto): Promise<Team> {
     const teamExists: Team[] = await this.findByName(createTeamDto.name);
     console.log(teamExists);
+
     if (teamExists && teamExists.length === 0) {
-      const created: Team = await Team.create({
-        name: createTeamDto.name,
-        img: createTeamDto.img,
-      });
-      created.save();
-      return created;
+      try {
+        const created: Team = await this.teamModel.create({
+          name: createTeamDto.name,
+          img: createTeamDto.img,
+        });
+        // created.save();
+        return created;
+      } catch (err) {
+        throw new BadRequestException(err.message);
+      }
     } else {
       throw new BadRequestException('Team already exists');
     }
